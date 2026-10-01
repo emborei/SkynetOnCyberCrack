@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aether – Demonstrator des lokalen Kontrollfluss-Prototyps</title>
+<meta name="description" content="Statische Demo des lokalen Aether-Planungsprototyps: echte planner.py-Läufe, Freigabesperre, Vetos und Ergebnisprüfung. Ohne Tracking, ohne externe Dienste.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Aether · lokaler Kontrollfluss-Prototyp</p>
+    <h1>Freigabe, Veto und Ergebnisprüfung – <span class="accent">nachvollziehbar</span></h1>
+    <p class="lede" id="lede">
+      Diese Seite zeigt keine Erfassung und keinen Serverprozess. Sie replayt
+      Abläufe, die beim Bauen dieser Seite durch den echten
+      <code>aether/planner.py</code> gelaufen sind.
+    </p>
+    <div class="chips" id="status-chips" aria-label="Build- und Prüfstatus"></div>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section id="replay" class="panel" aria-labelledby="replay-h">
+    <h2 id="replay-h">Abläufe abspielen</h2>
+    <p class="hint">
+      Jeder Schritt ist ein echter Aufruf der Bibliothek. Fehler sind die
+      tatsächlich geworfenen Ausnahmen, keine nachgestellten Meldungen.
+    </p>
+
+    <div class="scenario-tabs" id="scenario-tabs" role="tablist"
+         aria-label="Verfügbare Abläufe"></div>
+
+    <p class="claim" id="scenario-claim"></p>
+
+    <div class="replay-grid">
+      <div class="replay-main">
+        <div class="controls">
+          <button type="button" id="btn-prev">← Zurück</button>
+          <button type="button" id="btn-next" class="primary">Weiter →</button>
+          <button type="button" id="btn-play">▶ Abspielen</button>
+          <button type="button" id="btn-reset">↺ Von vorn</button>
+          <span class="progress" id="progress" aria-live="polite"></span>
+        </div>
+
+        <article class="step" id="step-card" aria-live="polite"></article>
+
+        <div class="state" id="state-card"></div>
+      </div>
+
+      <aside class="replay-side">
+        <h3>Plan <span class="muted">(t0–t8)</span></h3>
+        <ol class="board" id="plan-board"></ol>
+        <h3>Audit <span class="muted" id="audit-count"></span></h3>
+        <ol class="audit" id="audit-log"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section id="gates" class="panel" aria-labelledby="gates-h">
+    <h2 id="gates-h">Die vier Sperren</h2>
+    <div class="gates" id="gates"></div>
+  </section>
+
+  <section id="roles" class="panel" aria-labelledby="roles-h">
+    <h2 id="roles-h">Rollen</h2>
+    <p class="hint">
+      Fünf dokumentierte Rollen. Im Prototyp werden sie von einem einzigen
+      Dialogassistenten dargestellt – nicht von unabhängigen Prozessen.
+    </p>
+    <div class="roles" id="role-cards"></div>
+  </section>
+
+  <section id="rules" class="panel" aria-labelledby="rules-h">
+    <h2 id="rules-h">Veto-Regeln und ihre Grenze</h2>
+    <div class="table-wrap">
+      <table id="rules-table">
+        <thead>
+          <tr><th scope="col">Regel</th><th scope="col">Prüfung</th><th scope="col">Grenze</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="review" class="panel" aria-labelledby="review-h">
+    <h2 id="review-h">Prüfstand</h2>
+    <div class="review-grid">
+      <div>
+        <h3>Regelprüfungen <span class="muted">AEGIS</span></h3>
+        <ul class="checks" id="review-checks"></ul>
+      </div>
+      <div>
+        <h3>Was tatsächlich verifiziert ist</h3>
+        <ul class="checks" id="verification-facts"></ul>
+      </div>
+      <div>
+        <h3>Verbleibende Risiken</h3>
+        <ul class="plain" id="remaining-risks"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits" class="panel" aria-labelledby="limits-h">
+    <h2 id="limits-h">Grenzen und ausstehende Entscheidungen</h2>
+    <div class="review-grid">
+      <div>
+        <h3>Einschränkungen</h3>
+        <ul class="plain" id="limitations"></ul>
+      </div>
+      <div>
+        <h3>Nächste menschliche Entscheidungen</h3>
+        <ul class="decisions" id="next-decisions"></ul>
+      </div>
+      <div>
+        <h3>Erstellungslog <span class="muted">run.log</span></h3>
+        <ul class="plain small" id="run-log"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="provenance" class="panel" aria-labelledby="provenance-h">
+    <h2 id="provenance-h">Herkunft dieser Seite</h2>
+    <div id="provenance-body"></div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      Keine Cookies, kein Analytics, keine Schriftarten oder Bibliotheken von
+      Dritten, keine Netzwerkaufrufe aus dem Browser. Die Seite ist vollständig
+      statisch und funktioniert offline.
+    </p>
+    <p class="muted" id="foot-meta"></p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
