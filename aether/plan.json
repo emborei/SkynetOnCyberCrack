@@ -1,0 +1,74 @@
+[
+  {
+    "id": "t0",
+    "title": "Freigabe und begrenzten Prototypumfang dokumentieren",
+    "assignee": "NEXUS",
+    "reason": "Nur ein menschlich freigegebener Umfang darf umgesetzt werden; offene Vetos bleiben blockierend.",
+    "depends_on": [],
+    "parallel_group": null
+  },
+  {
+    "id": "t1",
+    "title": "JSON-Datenverträge für Aufgaben, Entscheidungen, Freigaben, Vetos und Ergebnisse spezifizieren",
+    "assignee": "PRISM",
+    "reason": "Gemeinsame Datenverträge machen die Rollenbeiträge prüfbar und austauschbar.",
+    "depends_on": ["t0"],
+    "parallel_group": "p1"
+  },
+  {
+    "id": "t2",
+    "title": "Lokales Dateilayout, datensparsame Logs und menschliche Betriebsübergabe spezifizieren",
+    "assignee": "PULSE",
+    "reason": "Der Prototyp benötigt einen nachvollziehbaren Betrieb ohne Cloud oder Tracking.",
+    "depends_on": ["t0"],
+    "parallel_group": "p1"
+  },
+  {
+    "id": "t3",
+    "title": "Bedrohungsmodell und Prüfkriterien für Freigaben, Vetos und menschliche Kontrolle erstellen",
+    "assignee": "AEGIS",
+    "reason": "Kontrollverlust und Umgehung von Vetos müssen vor der Implementierung überprüfbare Fehlerfälle sein.",
+    "depends_on": ["t0"],
+    "parallel_group": "p1"
+  },
+  {
+    "id": "t4",
+    "title": "Vollständige Python-stdlib-Dateien für lokalen Aufgabenplaner mit Abhängigkeiten, Parallelitätsgruppen und Freigabesperren erstellen",
+    "assignee": "FORGE",
+    "reason": "Ein begrenzter Prototyp demonstriert Koordination, ohne echte Unternehmenshandlungen oder unbestätigte Modellläufe auszuführen.",
+    "depends_on": ["t1", "t2", "t3"],
+    "parallel_group": null
+  },
+  {
+    "id": "t5",
+    "title": "Unittest-Dateien und eindeutig als simuliert markierte Beispieldaten erstellen, ohne Tests auszuführen",
+    "assignee": "FORGE",
+    "reason": "Freigaben, Veto-IDs, ungültige Pläne und Abhängigkeiten sollen später lokal reproduzierbar prüfbar sein.",
+    "depends_on": ["t4"],
+    "parallel_group": "p2"
+  },
+  {
+    "id": "t6",
+    "title": "Lokale Bedienungsanleitung und run.log über tatsächlich erstellte Artefakte schreiben",
+    "assignee": "PULSE",
+    "reason": "Menschen müssen Start, Stopp, Grenzen und Übergabe verstehen; nicht ausgeführte Tests dürfen nicht als erfolgreich erscheinen.",
+    "depends_on": ["t4"],
+    "parallel_group": "p2"
+  },
+  {
+    "id": "t7",
+    "title": "summary.json mit Ergebnissen, Einschränkungen und ausstehenden menschlichen Entscheidungen erstellen",
+    "assignee": "NEXUS",
+    "reason": "Der Abschluss muss den realen Artefaktstatus und fehlende Laufzeitprüfung transparent machen.",
+    "depends_on": ["t5", "t6"],
+    "parallel_group": null
+  },
+  {
+    "id": "t8",
+    "title": "Alle Artefakte einschließlich Zusammenfassung statisch abschließend prüfen und FREI oder Veto dokumentieren",
+    "assignee": "AEGIS",
+    "reason": "Die abschließende Kontrolle bleibt von der Erstellung getrennt und behauptet keine Laufzeitverifikation.",
+    "depends_on": ["t7"],
+    "parallel_group": null
+  }
+]

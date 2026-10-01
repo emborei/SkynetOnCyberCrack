@@ -1,0 +1,8 @@
+{
+  "task_id": "t0",
+  "output": ["aether/approval.json"],
+  "explanation": "Die menschliche Zustimmung ist auf die Erstellung der geplanten Artefakte begrenzt.",
+  "decision": "Spezifikationsaufgaben freigeben",
+  "reason": "Zustimmung liegt vor; die Planprüfung enthält keine offenen Vetos.",
+  "aegis_review": {"status": "FREI", "reason": "Keine Laufzeit- oder Betriebsbefugnis wird aus dem j abgeleitet.", "method": "Statische Rollenprüfung durch denselben Dialogassistenten"}
+}

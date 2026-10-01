@@ -1,0 +1,24 @@
+{
+  "status": "FREI",
+  "artifact": "aether/plan.json",
+  "reviewer": "AEGIS",
+  "review_type": "Statische Rollenprüfung im Dialog, kein unabhängiger Agentenlauf",
+  "reason": "Der Plan enthält neun begründete Tasks, beginnt mit NEXUS, endet mit AEGIS und begrenzt die Umsetzung auf lokale Text-Artefakte unter menschlicher Kontrolle.",
+  "checks": [
+    {"rule": "A-01", "status": "FREI", "reason": "Neun Tasks unterschreiten die Grenze von 20 Schritten."},
+    {"rule": "A-02", "status": "FREI", "reason": "Jeder Task enthält ein nicht leeres reason-Feld."},
+    {"rule": "A-03", "status": "FREI", "reason": "Nur lokale, freie Mittel sind vorgesehen; externe Dienste und Tracking sind nicht Bestandteil des Plans."},
+    {"rule": "A-04", "status": "FREI", "reason": "Ausführung bleibt bis zur menschlichen Zustimmung gesperrt; Nexus kann Vetos nicht aufheben und Pulse erhält keine selbstständige Betriebsbefugnis."}
+  ],
+  "vetos": [],
+  "execution_approved": false,
+  "next_action": {
+    "decision": "Auf menschliches j warten; keine Tasks starten und keinen Code ausführen.",
+    "reason": "Die Planprüfung ist keine Ausführungsfreigabe."
+  },
+  "review_gate": {
+    "decision": "Jedes Task-Ergebnis muss vor Verwendung durch abhängige Tasks von AEGIS geprüft werden; offene Vetos stoppen den Lauf.",
+    "reason": "Parallelität darf die Ergebnisprüfung nicht umgehen."
+  },
+  "override_hint": "Nur der Mensch darf ein konkretes Veto mit override <ID> aufheben. Dies ersetzt nicht die Planfreigabe."
+}
