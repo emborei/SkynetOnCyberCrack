@@ -1,0 +1,96 @@
+name: Aether demo to GitHub Pages
+
+# Publishes the static demo in aether/demo/ on GitHub Pages.
+# Free tier only: public repository, GitHub-hosted runner, no paid service.
+# The site is built from the real artifacts and contains no tracker.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "aether/**"
+      - ".github/workflows/demo-pages.yml"
+  pull_request:
+    paths:
+      - "aether/**"
+      - ".github/workflows/demo-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify planner and build demo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run planner unit tests
+        working-directory: aether
+        run: python -m unittest discover -s . -p 'test_*.py' -v
+
+      - name: Build static demo from real artifacts
+        run: python aether/demo/build.py
+
+      - name: Self-test the offline guard
+        run: python aether/demo/check_offline.py --self-test
+
+      - name: Assert the site loads no remote resource (A-03)
+        run: python aether/demo/check_offline.py aether/demo/_site
+
+      - name: List generated site
+        run: ls -la aether/demo/_site
+
+      - name: Hand site to the deploy job
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-demo-site
+          path: aether/demo/_site
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy to GitHub Pages
+    # Never deploy from a pull request; only main and manual runs publish.
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v4
+        with:
+          name: aether-demo-site
+          path: _site
+
+      # Note: this action cannot create the Pages site. Creating a site needs
+      # repository administration rights, which a workflow token can never be
+      # granted. An administrator sets Settings -> Pages -> Source once to
+      # "GitHub Actions"; every deployment afterwards is automatic.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
