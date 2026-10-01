@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bedrohungsmodell · Aether-Demo</title>
+<meta name="description" content="Bedrohungsmodell — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a href="transcript.html">Skript-Transkript</a><a href="readme.html">Doku</a><a href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Bedrohungsmodell</h1>
+<p class="lead">Quelle: <code>aether/threat_model.md</code> (unverändert konvertiert).</p><h1>Bedrohungsmodell und Abnahme</h1>
+<h2>Vertrauensgrenze</h2>
+<p>Der Prototyp ist eine Bibliothek für einen vertrauenswürdigen lokalen menschlichen Aufrufer. Python-Code mit Zugriff auf das Objekt kann interne Attribute verändern oder Freigabemethoden aufrufen. Dies ist keine Sandbox und keine Authentifizierung. Unvertrauenswürdige Modelle dürfen deshalb niemals direkten API-, Python-, Dateisystem- oder Prozesszugriff bekommen.</p>
+<h2>Regeln</h2>
+<table><thead><tr><th>Regel</th><th>Prüfung</th><th>Grenze</th></tr></thead><tbody><tr><td>A-01</td><td>Mehr als 20 Tasks ablehnen</td><td>Technisch validiert</td></tr><tr><td>A-02</td><td>Leere/fehlende reason ablehnen</td><td>Bedeutung bleibt menschliche Prüfung</td></tr><tr><td>A-03</td><td>Inhalte auf Tracking, Telemetrie, Paywall, Cloud-Pflicht, Lock-in, Obfuskation prüfen</td><td>Semantische Prüfung durch Mensch/AEGIS, nicht durch Schlagwortfilter</td></tr><tr><td>A-04</td><td>Freigabesperre, offene Vetos, Ergebnisprüfung, Pause und neue Freigabe bei neuer Instanz</td><td>Nur im vorgesehenen API-Pfad, keine Sicherheitsgrenze gegen lokalen Code</td></tr></tbody></table>
+<h2>Fehlerfälle</h2>
+<ul><li>Planänderung: defensive Kopie; neuer Plan erfordert neue Instanz.</li><li>Zyklen/fehlende IDs: Plan ablehnen, keine teilweise Ausführung.</li><li>Prompt-Injection in Titel oder Output: Daten werden nicht interpretiert oder ausgeführt.</li><li>Gefälschtes „j“ in Modelloutput: kein Parser leitet es zur Freigabemethode weiter.</li><li>Unbekanntes oder wiederholtes Override: Fehler, keine Zustandsänderung.</li><li>Abgelehntes Ergebnis: globales Veto und weiterhin unerfüllte Abhängigkeit bis neuer FREI-Prüfung.</li><li>Manipulierte Snapshot-Daten: unabhängige Kopien schützen den internen Zustand im normalen API-Gebrauch.</li><li>Nebenläufige Zustandsänderungen: nicht unterstützt; ein vertrauenswürdiger Koordinator muss API-Zugriffe sequenzieren.</li><li>Prozessabbruch: keine automatische Fortsetzung, keine behauptete Wiederherstellung.</li></ul>
+<h2>Abnahmegrenze</h2>
+<ul><li>decision: FREI kann hier nur die statische Artefaktprüfung bezeichnen.</li></ul>
+<p>reason: Tests werden in diesem Durchlauf nicht ausgeführt; es gibt keine unabhängigen Agentenprozesse.</p>
+<ul><li>decision: Kein produktiver Unternehmensbetrieb und keine untrusted-Agent-Integration freigeben.</li></ul>
+<p>reason: Authentifizierung, persistente Transaktionen, OS-Isolation und reale Laufzeitprüfungen fehlen.</p>
+<ul><li>decision: Alle Ergebnisse einschließlich summary.json und run.log abschließend prüfen.</li></ul>
+<p>reason: Auch Abschlussberichte dürfen keine erfundenen Tests oder Betriebsfähigkeiten behaupten.</p>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

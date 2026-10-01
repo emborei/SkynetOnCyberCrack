@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aether-README · Aether-Demo</title>
+<meta name="description" content="Aether-README — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a href="transcript.html">Skript-Transkript</a><a class="active" href="readme.html">Doku</a><a href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Aether-README</h1>
+<p class="lead">Quelle: <code>aether/README.md</code> (unverändert konvertiert).</p><h1>Aether: lokaler Kontrollfluss-Prototyp</h1>
+<p><strong>Status:</strong> Text-Artefakte erstellt, Code und Tests nicht ausgeführt. Keine unabhängigen Agentenprozesse, keine echten Modellaufrufe, kein laufendes Unternehmen.</p>
+<h2>Enthalten</h2>
+<p>Fünf dokumentierte Rollen; ein geprüfter Neun-Task-Plan; eine Python-stdlib-Bibliothek für Validierung, menschliche Freigabe, globale Vetos, Bereitschaftslisten, Ergebnisprüfungen und Pause. Parallelität bedeutet hier nur gleichzeitig bereitstehende Tasks, nicht laufende Worker.</p>
+<h2>Voraussetzungen</h2>
+<p>Python 3.9 oder neuer als vorgesehene, noch nicht getestete Zielumgebung. Keine Pakete, API-Schlüssel, Cloud-Dienste oder Installation erforderlich.</p>
+<h2>Manuelle Prüfung</h2>
+<p>Die folgenden Befehle sind für den Menschen vorgesehen und wurden bei der Erstellung nicht ausgeführt:</p>
+<pre><code>cd /home/user/SkynetOnCyberCrack/aether
+python3 -m unittest discover -s . -p &#x27;test_*.py&#x27; -v</code></pre>
+<h2>Bibliothek lokal ausprobieren</h2>
+<p>Nach eigener Prüfung kann ein Mensch aus dem Verzeichnis <code>aether</code> interaktiv Python starten. Dies ist Beispielcode, keine bereits ausgeführte Sitzung:</p>
+<pre><code>import json
+from pathlib import Path
+from planner import Planner
+
+plan = json.loads(Path(&quot;plan.json&quot;).read_text(encoding=&quot;utf-8&quot;))
+planner = Planner(plan)
+command = input(&quot;Approve this reviewed plan? [j/N] &quot;)
+if command == &quot;j&quot;:
+    planner.approve(command, &quot;Human reviewed the local plan&quot;)
+    print(planner.ready())
+else:
+    print(&quot;No approval; no progress&quot;)</code></pre>
+<p><code>ready()</code> führt nichts aus. <code>submit()</code> nimmt JSON-Daten entgegen, <code>review()</code> markiert sie FREI oder VETO. Nur geprüfte Ergebnisse erfüllen Abhängigkeiten. <code>veto()</code> blockiert global; <code>override(&#x27;override &lt;ID&gt;&#x27;, reason)</code> ist ausschließlich für den menschlichen Aufrufer vorgesehen. Eine Dialogfreigabe oder eine JSON-Datei wird nicht automatisch eingelesen, um diese Sperren zu umgehen.</p>
+<p><code>pause(reason)</code> sperrt neue Fortschritte bis zur erneuten Zustimmung. Es existiert kein Worker, den diese Methode beenden könnte. Alle Zustände gehen beim Prozessende verloren. <code>snapshot()</code> exportiert nur einen Bericht; es gibt keine Wiederherstellung und keine automatische Freigabe nach Neustart.</p>
+<h2>Unbedingt beachten</h2>
+<ul><li>Die API unterscheidet nicht technisch zwischen Menschen und Agenten. Nur ein vertrauenswürdiger menschlicher Aufrufer darf sie bedienen.</li><li>Keine Authentifizierung, Isolation, Thread-Sicherheit oder revisionssichere Speicherung.</li><li>A-03 erfordert semantische menschliche Prüfung. Die Planvalidierung garantiert keine ethische Unbedenklichkeit von Freitexten.</li><li>Abgelehnte Ergebnisse können nach menschlichem Override neu geprüft, aber nicht in-place ersetzt werden. Inhaltliche Überarbeitung erfordert einen neuen Plan/Lauf.</li><li>Keine Nutzerdaten oder Geheimnisse in Logs und Beispielen ablegen.</li><li>Die Rollenprüfungen stammen vom selben Dialogassistenten; sie sind keine unabhängige Sicherheitsprüfung.</li></ul>
+<h2>Nächste menschliche Entscheidungen</h2>
+<ul><li>decision: Vor weiterer Entwicklung Tests lokal ausführen und Resultate prüfen.</li></ul>
+<p>reason: Die statische Durchsicht ersetzt keine Laufzeitverifikation.</p>
+<ul><li>decision: Ein konkretes erstes Produkt sowie Umfang, Budget und Verantwortliche festlegen.</li></ul>
+<p>reason: Das Projektziel allein definiert kein ausführbares Geschäftsmodell.</p>
+<ul><li>decision: Echte Parallel-Worker, persistente Zustände oder optionale lokale Modelle erst in einem neuen freigegebenen Plan ergänzen.</li></ul>
+<p>reason: Diese Änderungen benötigen zusätzliche Kontroll- und Sicherheitsprüfungen.</p>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

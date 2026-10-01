@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Betrieb &amp; Übergabe · Aether-Demo</title>
+<meta name="description" content="Betrieb &amp; Übergabe — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a href="transcript.html">Skript-Transkript</a><a href="readme.html">Doku</a><a href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Betrieb &amp; Übergabe</h1>
+<p class="lead">Quelle: <code>aether/operations.md</code> (unverändert konvertiert).</p><h1>Lokaler Betrieb und Übergabe</h1>
+<h2>Dateilayout</h2>
+<ul><li><code>goal.md</code>, <code>agents.md</code>, <code>plan.json</code>, <code>plan_review.json</code>: Ziel, Rollen und geprüfter Plan.</li><li><code>approval.json</code>: menschliche Freigabe dieses Text-Artefakt-Laufs.</li><li><code>contracts.md</code>, <code>operations.md</code>, <code>threat_model.md</code>: Spezifikation.</li><li><code>planner.py</code>: reine Python-stdlib-Bibliothek, ohne Worker oder Netzwerk.</li><li><code>test_planner.py</code>, <code>example_simulated.json</code>: nicht ausgeführte Tests und simulierte Daten.</li><li><code>result_t0.json</code> bis <code>result_t8.json</code>: Ergebnisse einschließlich statischer Rollenprüfung.</li><li><code>summary.json</code>, <code>run.log</code>, <code>final_review.json</code>: Abschluss und Grenzen.</li></ul>
+<h2>Betrieb</h2>
+<ul><li>decision: Kein automatischer Start und kein Deployment.</li></ul>
+<p>reason: Ein verantwortlicher Mensch muss jede zukünftige Laufzeitintegration bewusst freigeben.</p>
+<ul><li>decision: Kein Hintergrundprozess und kein Zugriff auf Netzwerk, Konten oder Zahlungen.</li></ul>
+<p>reason: Die Bibliothek soll nur Aufgabenbereitschaft und Sperren modellieren.</p>
+<ul><li>decision: Audit bleibt im Arbeitsspeicher; run.log dokumentiert ausschließlich diesen Erstellungsdurchlauf.</li></ul>
+<p>reason: Keine Nutzungsüberwachung oder heimliche Persistenz.</p>
+<ul><li>decision: Keine Geheimnisse oder personenbezogenen Daten in Outputs, Begründungen oder Logs ablegen.</li></ul>
+<p>reason: Auch lokale Dateien können weitergegeben werden.</p>
+<h2>Stopp, Neustart, Übergabe</h2>
+<p>Ein eingebettetes Programm kann <code>pause(reason)</code> aufrufen; ein neuer Aufruf von <code>approve(&#x27;j&#x27;, reason)</code> ist danach nötig. Prozessbeendigung beendet die Bibliotheksnutzung; es gibt keine Wiederanlaufautomatik. Ohne Worker müssen eventuell extern gestartete Tätigkeiten separat gestoppt werden. Bei Neustart ist der Zustand verloren und die Freigabe erneut nötig. <code>snapshot()</code> ist nur ein Bericht; es existiert kein automatischer Import von Freigaben.</p>
+<p>Übergabe erfolgt durch menschliche Benennung eines Nachfolgers, Prüfung der Dateien und erneute Freigabe. Ist niemand autorisiert, bleibt das System stehen. Kein Agent bestimmt seinen eigenen Nachfolger.</p>
+<h2>Kosten und Monitoring</h2>
+<p>Keine kostenpflichtigen Dienste und keine automatische Ressourcenbeschaffung. Kein Produktionsmonitoring implementiert. Die lokale Maschine verursacht normale eigene Betriebskosten; es gibt keine behauptete Kostenprognose.</p>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

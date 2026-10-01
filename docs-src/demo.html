@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interaktive Aether-Demo · GitHub Pages</title>
+<meta name="description" content="Browser-Demo der Aether-Kontrollgates: Freigabe nur mit j, globale Vetos, Overrides, Ergebnisprüfungen. Offline lauffähig, ohne Tracking.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span>
+  <a href="index.html">Start</a>
+  <a class="active" href="demo.html">Interaktive Demo</a>
+  <a href="doku/transcript.html">Skript-Transkript</a>
+  <a href="doku/readme.html">Doku</a>
+  <a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Interaktive Kontrollfluss-Demo</h1>
+  <p class="lead">Sie bedienen einen nachweislich schrittgleichen Port von
+  <code>aether/planner.py</code> (66/66 Paritätsschritte identisch, vgl.
+  <code>tools/parity_check.py</code>). Der Zustand lebt nur im Seitenspeicher: kein Netzwerk,
+  kein Storage, keine Modelle. Massgeblich bleibt immer das Python-Original im Repository.</p>
+
+  <div class="note">
+    <strong>Regeln zum Mitmachen:</strong> Freigabe nur mit exakt <span class="kbd">j</span>.
+  Ein Veto blockiert global; nur <span class="kbd">override &lt;ID&gt;</span> hebt genau dieses
+  Veto auf — und ersetzt dabei nie die FREI-Prüfung. Abgelehnte Ergebnisse brauchen eine neue Prüfung.
+  </div>
+
+  <div class="panel">
+    <div class="rows" style="grid-auto-flow: column; display:grid; gap:8px; flex-wrap:wrap;">
+      <button id="btn-replay" class="primary">▶ Ersten Lauf nachspielen (simulierte Ergebnisse)</button>
+      <button id="btn-reset">⟳ Neue Instanz (Reset)</button>
+      <button id="btn-snapshot">Snapshot ansehen</button>
+    </div>
+  </div>
+
+  <div class="demo-grid">
+    <section>
+      <div class="panel">
+        <h2>Plan · <span id="plan-size"></span> Tasks</h2>
+        <div id="veto-banner" hidden class="veto-line"></div>
+        <div class="tasks" id="tasks"></div>
+      </div>
+      <details class="panel" id="snapshot-panel" hidden>
+        <h3>snapshot() — nur ein Bericht, keine Wiederherstellung</h3>
+        <pre id="snapshot-json"></pre>
+      </details>
+    </section>
+
+    <aside>
+      <div class="panel">
+        <h2>Menschliche Freigabe</h2>
+        <div id="gate-state" class="badge">nicht freigegeben</div>
+        <div class="field" style="margin-top:10px">
+          <label for="cmd">Kommando (exakt <span class="kbd">j</span>)</label>
+          <input type="text" id="cmd" placeholder="j" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="approve-reason">Begründung (Pflichtfeld)</label>
+          <input type="text" id="approve-reason" placeholder="z. B. Demo im Browser" autocomplete="off">
+        </div>
+        <div class="rows">
+          <button id="btn-approve" class="primary">approve()</button>
+          <button id="btn-pause" class="danger">pause(reason)</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Veto</h2>
+        <div class="field"><label for="veto-id">Veto-ID (einmalig)</label>
+          <input type="text" id="veto-id" placeholder="v1" autocomplete="off"></div>
+        <div class="field"><label for="veto-rule">Regel</label>
+          <select id="veto-rule">
+            <option>A-01</option><option>A-02</option><option>A-03</option>
+            <option selected>A-04</option>
+          </select></div>
+        <div class="field"><label for="veto-artifact">Artefakt</label>
+          <input type="text" id="veto-artifact" placeholder="t0" autocomplete="off"></div>
+        <div class="field"><label for="veto-reason">Grund</label>
+          <input type="text" id="veto-reason" placeholder="menschliche Prüfung nötig" autocomplete="off"></div>
+        <button id="btn-veto" class="danger">veto()</button>
+      </div>
+
+      <div class="panel">
+        <h2>Override (nur Mensch)</h2>
+        <div class="field"><label for="override-cmd">Kommando</label>
+          <input type="text" id="override-cmd" placeholder="override v1" autocomplete="off"></div>
+        <div class="field"><label for="override-reason">Grund</label>
+          <input type="text" id="override-reason" placeholder="Ausnahme akzeptiert" autocomplete="off"></div>
+        <button id="btn-override">override()</button>
+        <div id="vetos" style="margin-top:10px"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Audit-Protokoll</h2>
+        <div class="log" id="log"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="note danger">
+    <strong>Was die Demo nicht kann:</strong> Sie führt keine Tasks aus, startet keine Worker,
+    fragt keine Modelle ab und kennt keine Persistenz. „Simuliert abgeben“ erzeugt nur als
+    <code>simulated: true</code> markierte JSON-Daten. Ein vertrauenswürdiger menschlicher
+    Aufrufer ist auch hier Annahme, nicht Technik — genau wie im Python-Original.
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">
+  Port auf Basis von <code>docs-src/assets/planner.js</code> ·
+  Datenquelle <code>assets/artifacts.js</code>, erzeugt von <code>tools/build_site.py</code> ·
+  kein Tracking, keine externen Anfragen
+</div></footer>
+<script src="assets/artifacts.js"></script>
+<script src="assets/planner.js"></script>
+<script src="assets/demo.js"></script>
+</body>
+</html>
