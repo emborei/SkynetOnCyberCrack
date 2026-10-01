@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artefakte des ersten Laufs · Aether-Demo</title>
+<meta name="description" content="Artefakte des ersten Laufs — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a href="transcript.html">Skript-Transkript</a><a href="readme.html">Doku</a><a class="active" href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Artefakte des ersten Laufs</h1>
+<p>Unveränderte Kopien der Text-Artefakte aus dem ersten Lauf. Sie sind Dokumentation — keine automatische Laufzeitfreigabe.</p>
+<h2>approval.json</h2>
+<pre><code>{
+  &quot;decision&quot;: &quot;Den vorliegenden Neun-Task-Plan als Text-Artefakte umsetzen&quot;,
+  &quot;reason&quot;: &quot;Der Mensch hat im Dialog ausdrücklich mit j zugestimmt.&quot;,
+  &quot;human_response&quot;: &quot;j&quot;,
+  &quot;scope&quot;: &quot;aether/plan.json, t0 bis t8; keine Codeausführung, kein Deployment, keine Unternehmenshandlungen&quot;,
+  &quot;overrides&quot;: [],
+  &quot;runtime_authorization&quot;: false
+}</code></pre>
+<h2>Aether-Plan (9 Tasks)</h2>
+<pre><code>[
+  {
+    &quot;id&quot;: &quot;t0&quot;,
+    &quot;title&quot;: &quot;Freigabe und begrenzten Prototypumfang dokumentieren&quot;,
+    &quot;assignee&quot;: &quot;NEXUS&quot;,
+    &quot;reason&quot;: &quot;Nur ein menschlich freigegebener Umfang darf umgesetzt werden; offene Vetos bleiben blockierend.&quot;,
+    &quot;depends_on&quot;: [],
+    &quot;parallel_group&quot;: null
+  },
+  {
+    &quot;id&quot;: &quot;t1&quot;,
+    &quot;title&quot;: &quot;JSON-Datenverträge für Aufgaben, Entscheidungen, Freigaben, Vetos und Ergebnisse spezifizieren&quot;,
+    &quot;assignee&quot;: &quot;PRISM&quot;,
+    &quot;reason&quot;: &quot;Gemeinsame Datenverträge machen die Rollenbeiträge prüfbar und austauschbar.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t0&quot;
+    ],
+    &quot;parallel_group&quot;: &quot;p1&quot;
+  },
+  {
+    &quot;id&quot;: &quot;t2&quot;,
+    &quot;title&quot;: &quot;Lokales Dateilayout, datensparsame Logs und menschliche Betriebsübergabe spezifizieren&quot;,
+    &quot;assignee&quot;: &quot;PULSE&quot;,
+    &quot;reason&quot;: &quot;Der Prototyp benötigt einen nachvollziehbaren Betrieb ohne Cloud oder Tracking.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t0&quot;
+    ],
+    &quot;parallel_group&quot;: &quot;p1&quot;
+  },
+  {
+    &quot;id&quot;: &quot;t3&quot;,
+    &quot;title&quot;: &quot;Bedrohungsmodell und Prüfkriterien für Freigaben, Vetos und menschliche Kontrolle erstellen&quot;,
+    &quot;assignee&quot;: &quot;AEGIS&quot;,
+    &quot;reason&quot;: &quot;Kontrollverlust und Umgehung von Vetos müssen vor der Implementierung überprüfbare Fehlerfälle sein.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t0&quot;
+    ],
+    &quot;parallel_group&quot;: &quot;p1&quot;
+  },
+  {
+    &quot;id&quot;: &quot;t4&quot;,
+    &quot;title&quot;: &quot;Vollständige Python-stdlib-Dateien für lokalen Aufgabenplaner mit Abhängigkeiten, Parallelitätsgruppen und Freigabesperren erstellen&quot;,
+    &quot;assignee&quot;: &quot;FORGE&quot;,
+    &quot;reason&quot;: &quot;Ein begrenzter Prototyp demonstriert Koordination, ohne echte Unternehmenshandlungen oder unbestätigte Modellläufe auszuführen.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t1&quot;,
+      &quot;t2&quot;,
+      &quot;t3&quot;
+    ],
+    &quot;parallel_group&quot;: null
+  },
+  {
+    &quot;id&quot;: &quot;t5&quot;,
+    &quot;title&quot;: &quot;Unittest-Dateien und eindeutig als simuliert markierte Beispieldaten erstellen, ohne Tests auszuführen&quot;,
+    &quot;assignee&quot;: &quot;FORGE&quot;,
+    &quot;reason&quot;: &quot;Freigaben, Veto-IDs, ungültige Pläne und Abhängigkeiten sollen später lokal reproduzierbar prüfbar sein.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t4&quot;
+    ],
+    &quot;parallel_group&quot;: &quot;p2&quot;
+  },
+  {
+    &quot;id&quot;: &quot;t6&quot;,
+    &quot;title&quot;: &quot;Lokale Bedienungsanleitung und run.log über tatsächlich erstellte Artefakte schreiben&quot;,
+    &quot;assignee&quot;: &quot;PULSE&quot;,
+    &quot;reason&quot;: &quot;Menschen müssen Start, Stopp, Grenzen und Übergabe verstehen; nicht ausgeführte Tests dürfen nicht als erfolgreich erscheinen.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t4&quot;
+    ],
+    &quot;parallel_group&quot;: &quot;p2&quot;
+  },
+  {
+    &quot;id&quot;: &quot;t7&quot;,
+    &quot;title&quot;: &quot;summary.json mit Ergebnissen, Einschränkungen und ausstehenden menschlichen Entscheidungen erstellen&quot;,
+    &quot;assignee&quot;: &quot;NEXUS&quot;,
+    &quot;reason&quot;: &quot;Der Abschluss muss den realen Artefaktstatus und fehlende Laufzeitprüfung transparent machen.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t5&quot;,
+      &quot;t6&quot;
+    ],
+    &quot;parallel_group&quot;: null
+  },
+  {
+    &quot;id&quot;: &quot;t8&quot;,
+    &quot;title&quot;: &quot;Alle Artefakte einschließlich Zusammenfassung statisch abschließend prüfen und FREI oder Veto dokumentieren&quot;,
+    &quot;assignee&quot;: &quot;AEGIS&quot;,
+    &quot;reason&quot;: &quot;Die abschließende Kontrolle bleibt von der Erstellung getrennt und behauptet keine Laufzeitverifikation.&quot;,
+    &quot;depends_on&quot;: [
+      &quot;t7&quot;
+    ],
+    &quot;parallel_group&quot;: null
+  }
+]</code></pre>
+<h2>plan_review.json</h2>
+<pre><code>{
+  &quot;status&quot;: &quot;FREI&quot;,
+  &quot;artifact&quot;: &quot;aether/plan.json&quot;,
+  &quot;reviewer&quot;: &quot;AEGIS&quot;,
+  &quot;review_type&quot;: &quot;Statische Rollenprüfung im Dialog, kein unabhängiger Agentenlauf&quot;,
+  &quot;reason&quot;: &quot;Der Plan enthält neun begründete Tasks, beginnt mit NEXUS, endet mit AEGIS und begrenzt die Umsetzung auf lokale Text-Artefakte unter menschlicher Kontrolle.&quot;,
+  &quot;checks&quot;: [
+    {
+      &quot;rule&quot;: &quot;A-01&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Neun Tasks unterschreiten die Grenze von 20 Schritten.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-02&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Jeder Task enthält ein nicht leeres reason-Feld.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-03&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Nur lokale, freie Mittel sind vorgesehen; externe Dienste und Tracking sind nicht Bestandteil des Plans.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-04&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Ausführung bleibt bis zur menschlichen Zustimmung gesperrt; Nexus kann Vetos nicht aufheben und Pulse erhält keine selbstständige Betriebsbefugnis.&quot;
+    }
+  ],
+  &quot;vetos&quot;: [],
+  &quot;execution_approved&quot;: false,
+  &quot;next_action&quot;: {
+    &quot;decision&quot;: &quot;Auf menschliches j warten; keine Tasks starten und keinen Code ausführen.&quot;,
+    &quot;reason&quot;: &quot;Die Planprüfung ist keine Ausführungsfreigabe.&quot;
+  },
+  &quot;review_gate&quot;: {
+    &quot;decision&quot;: &quot;Jedes Task-Ergebnis muss vor Verwendung durch abhängige Tasks von AEGIS geprüft werden; offene Vetos stoppen den Lauf.&quot;,
+    &quot;reason&quot;: &quot;Parallelität darf die Ergebnisprüfung nicht umgehen.&quot;
+  },
+  &quot;override_hint&quot;: &quot;Nur der Mensch darf ein konkretes Veto mit override &lt;ID&gt; aufheben. Dies ersetzt nicht die Planfreigabe.&quot;
+}</code></pre>
+<h2>final_review.json</h2>
+<pre><code>{
+  &quot;status&quot;: &quot;FREI&quot;,
+  &quot;reviewer&quot;: &quot;AEGIS&quot;,
+  &quot;scope&quot;: &quot;Statische Prüfung der in diesem Dialog erstellten Text-Artefakte, einschließlich result_t0.json bis result_t8.json, summary.json und run.log&quot;,
+  &quot;decision&quot;: &quot;Artefakterstellung abschließen, keine Produktions- oder Laufzeitfreigabe erteilen&quot;,
+  &quot;reason&quot;: &quot;Die Dateien entsprechen dem begrenzten lokalen Prototypumfang; verbleibende Sicherheits- und Laufzeitgrenzen sind explizit dokumentiert.&quot;,
+  &quot;checks&quot;: [
+    {
+      &quot;rule&quot;: &quot;A-01&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Der Plan bleibt bei neun Tasks.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-02&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Tasks und dokumentierte Entscheidungen haben Begründungen.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-03&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Quelltext verwendet ausschließlich copy und json; Tests unittest. Keine Cloud, Telemetrie oder Vendor-Abhängigkeit implementiert.&quot;
+    },
+    {
+      &quot;rule&quot;: &quot;A-04&quot;,
+      &quot;status&quot;: &quot;FREI&quot;,
+      &quot;reason&quot;: &quot;Keine ausführenden Worker vorhanden. Freigabe, Pause, Vetos und Reviews bleiben beim vertrauenswürdigen lokalen Aufrufer; fehlende Authentifizierung wird offengelegt.&quot;
+    }
+  ],
+  &quot;vetos&quot;: [],
+  &quot;override_hint&quot;: &quot;Nur der Mensch kann ein konkretes zukünftiges Veto mit override &lt;ID&gt; aufheben.&quot;,
+  &quot;verification&quot;: {
+    &quot;method&quot;: &quot;Statische Durchsicht des erzeugten Quelltexts und der Dokumentation durch denselben Dialogassistenten&quot;,
+    &quot;independent_agent_review&quot;: false,
+    &quot;code_executed&quot;: false,
+    &quot;tests_executed&quot;: false,
+    &quot;production_approved&quot;: false
+  },
+  &quot;remaining_risks&quot;: [
+    &quot;Keine empirische Funktions- oder Syntaxprüfung durchgeführt.&quot;,
+    &quot;Lokaler Python-Code kann API-Konventionen umgehen; kein Einsatz mit untrusted Agentenzugriff.&quot;,
+    &quot;Echte Parallelität und dauerhafte Zustände benötigen einen neuen Plan und zusätzliche Prüfungen.&quot;
+  ]
+}</code></pre>
+<h2>Task-Ergebnisse t0 bis t8</h2><h3>result_t0.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t0&quot;,
+  &quot;output&quot;: [
+    &quot;aether/approval.json&quot;
+  ],
+  &quot;explanation&quot;: &quot;Die menschliche Zustimmung ist auf die Erstellung der geplanten Artefakte begrenzt.&quot;,
+  &quot;decision&quot;: &quot;Spezifikationsaufgaben freigeben&quot;,
+  &quot;reason&quot;: &quot;Zustimmung liegt vor; die Planprüfung enthält keine offenen Vetos.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Keine Laufzeit- oder Betriebsbefugnis wird aus dem j abgeleitet.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung durch denselben Dialogassistenten&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Keine Laufzeit- oder Betriebsbefugnis wird aus dem j abgeleitet.</p><h3>result_t1.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t1&quot;,
+  &quot;output&quot;: [
+    &quot;aether/contracts.md&quot;
+  ],
+  &quot;explanation&quot;: &quot;Datenverträge und Ergebnisfreigaben sind spezifiziert.&quot;,
+  &quot;decision&quot;: &quot;Als Implementierungsgrundlage verwenden&quot;,
+  &quot;reason&quot;: &quot;Schnittstellen und Grenzen sind explizit.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Freigaben werden nicht aus Agentenoutput abgeleitet; Review ist Voraussetzung für Folgeaufgaben.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung, kein unabhängiger Prozess&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Freigaben werden nicht aus Agentenoutput abgeleitet; Review ist Voraussetzung für Folgeaufgaben.</p><h3>result_t2.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t2&quot;,
+  &quot;output&quot;: [
+    &quot;aether/operations.md&quot;
+  ],
+  &quot;explanation&quot;: &quot;Dateilayout, lokaler Betrieb und menschliche Übergabe sind dokumentiert.&quot;,
+  &quot;decision&quot;: &quot;Betriebsgrenzen übernehmen&quot;,
+  &quot;reason&quot;: &quot;Ohne autorisierten Menschen gibt es keine Fortsetzung.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Kein Tracking, keine Cloud und kein autonomer Wiederanlauf vorgesehen.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung, kein unabhängiger Prozess&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Kein Tracking, keine Cloud und kein autonomer Wiederanlauf vorgesehen.</p><h3>result_t3.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t3&quot;,
+  &quot;output&quot;: [
+    &quot;aether/threat_model.md&quot;
+  ],
+  &quot;explanation&quot;: &quot;Bedrohungen, Prüfkriterien und fehlende Sicherheitsgrenzen sind beschrieben.&quot;,
+  &quot;decision&quot;: &quot;Nur begrenzten Bibliotheksprototyp erstellen&quot;,
+  &quot;reason&quot;: &quot;Eine lokale API ist keine Isolation gegenüber untrusted Code.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Semantische Prüfung und Authentifizierung werden nicht fälschlich als implementiert behauptet.&quot;,
+    &quot;method&quot;: &quot;Statische Selbstprüfung derselben Rolle, keine unabhängige Sicherheitsabnahme&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Semantische Prüfung und Authentifizierung werden nicht fälschlich als implementiert behauptet.</p><h3>result_t4.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t4&quot;,
+  &quot;output&quot;: [
+    &quot;aether/planner.py&quot;
+  ],
+  &quot;explanation&quot;: &quot;Vollständige stdlib-Bibliothek für Planvalidierung, Bereitschaftslisten, Freigaben, Pause, Vetos und Ergebnisprüfungen erstellt. Keine Worker oder Modelle implementiert.&quot;,
+  &quot;decision&quot;: &quot;Testartefakte und Anleitung erstellen&quot;,
+  &quot;reason&quot;: &quot;Die spezifizierten Kontrollzustände sind im Quelltext abgebildet.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Statische Durchsicht: Freigabe und Vetos sperren Fortschritt; Ergebnisse erfüllen Abhängigkeiten erst nach FREI. Die API verlangt einen vertrauenswürdigen Aufrufer und behauptet keine Authentifizierung.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung, Code nicht ausgeführt&quot;,
+    &quot;limitations&quot;: [
+      &quot;Keine Thread-Sicherheit&quot;,
+      &quot;Keine Persistenz&quot;,
+      &quot;Keine semantische A-03-Automatik&quot;,
+      &quot;Kein Schutz gegen lokalen Python-Code&quot;
+    ]
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Statische Durchsicht: Freigabe und Vetos sperren Fortschritt; Ergebnisse erfüllen Abhängigkeiten erst nach FREI. Die API verlangt einen vertrauenswürdigen Aufrufer und behauptet keine Authentifizierung.</p><h3>result_t5.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t5&quot;,
+  &quot;output&quot;: [
+    &quot;aether/test_planner.py&quot;,
+    &quot;aether/example_simulated.json&quot;
+  ],
+  &quot;explanation&quot;: &quot;Zwölf Unittest-Methoden und ein explizit simuliertes Szenario erstellt; keine Tests ausgeführt.&quot;,
+  &quot;decision&quot;: &quot;Tests zur menschlichen lokalen Ausführung bereitstellen&quot;,
+  &quot;reason&quot;: &quot;Freigabesperren und Fehlerfälle benötigen reproduzierbare Laufzeitprüfung.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Die Testfälle adressieren Freigaben, Vetos, Abhängigkeiten, Zyklen, Isolation und Begründungen; keine bestandenen Tests behauptet.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung&quot;,
+    &quot;tests_executed&quot;: false
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Die Testfälle adressieren Freigaben, Vetos, Abhängigkeiten, Zyklen, Isolation und Begründungen; keine bestandenen Tests behauptet.</p><h3>result_t6.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t6&quot;,
+  &quot;output&quot;: [
+    &quot;aether/README.md&quot;,
+    &quot;aether/run.log&quot;
+  ],
+  &quot;explanation&quot;: &quot;Manuelle Testanleitung, Bibliotheksnutzung und lokales Erstellungslog dokumentiert.&quot;,
+  &quot;decision&quot;: &quot;Dokumentation für den begrenzten Prototyp bereitstellen&quot;,
+  &quot;reason&quot;: &quot;Menschen müssen die fehlende Laufzeitverifikation und Vertrauensgrenze erkennen.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Keine erfundenen Ausführungen; keine automatische Fortsetzung ohne Verantwortliche. run.log ist ausdrücklich kein Laufzeitlog.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Keine erfundenen Ausführungen; keine automatische Fortsetzung ohne Verantwortliche. run.log ist ausdrücklich kein Laufzeitlog.</p><h3>result_t7.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t7&quot;,
+  &quot;output&quot;: [
+    &quot;aether/summary.json&quot;
+  ],
+  &quot;explanation&quot;: &quot;Funktionsumfang, Teststatus, offene Entscheidungen und Grenzen zusammengefasst.&quot;,
+  &quot;decision&quot;: &quot;Abschließende statische Prüfung vornehmen&quot;,
+  &quot;reason&quot;: &quot;Auch der Abschlussbericht muss gegen tatsächliche Artefakte und den freigegebenen Umfang geprüft werden.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Bericht unterscheidet erstellte Dateien von nicht ausgeführtem Code und behauptet weder unabhängige Agenten noch Produktionsreife.&quot;,
+    &quot;method&quot;: &quot;Statische Rollenprüfung&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Bericht unterscheidet erstellte Dateien von nicht ausgeführtem Code und behauptet weder unabhängige Agenten noch Produktionsreife.</p><h3>result_t8.json</h3>
+<pre><code>{
+  &quot;task_id&quot;: &quot;t8&quot;,
+  &quot;output&quot;: [
+    &quot;aether/final_review.json&quot;
+  ],
+  &quot;explanation&quot;: &quot;Abschließende statische Rollenprüfung der erstellten Artefakte dokumentiert. Keine Code- oder Testausführung.&quot;,
+  &quot;decision&quot;: &quot;FREI für den Abschluss der Text-Artefakterstellung&quot;,
+  &quot;reason&quot;: &quot;Keine offenen Vetos im begrenzten Umfang; Produktionsbetrieb und untrusted-Agent-Zugriff bleiben ausdrücklich außerhalb der Freigabe.&quot;,
+  &quot;aegis_review&quot;: {
+    &quot;status&quot;: &quot;FREI&quot;,
+    &quot;reason&quot;: &quot;Der Prüfbericht benennt seine Methode und Grenzen, ohne unabhängige Prüfung oder getestete Laufzeit zu behaupten.&quot;,
+    &quot;method&quot;: &quot;Statische Selbstprüfung durch denselben Dialogassistenten, keine unabhängige Abnahme&quot;
+  }
+}</code></pre><p>Die eingebettete Rollenprüfung: <strong>FREI</strong> — Der Prüfbericht benennt seine Methode und Grenzen, ohne unabhängige Prüfung oder getestete Laufzeit zu behaupten.</p>
+<h2>summary.json</h2>
+<pre><code>{
+  &quot;project&quot;: &quot;Aether&quot;,
+  &quot;status&quot;: &quot;Text-Artefakte erstellt; keine Laufzeitverifikation&quot;,
+  &quot;decision&quot;: &quot;Den ersten Lauf als begrenzten lokalen Kontrollfluss-Prototyp abschließen&quot;,
+  &quot;reason&quot;: &quot;Der freigegebene Plan verlangt vollständige Dateien und statische Prüfung, nicht Codeausführung oder Unternehmensbetrieb.&quot;,
+  &quot;implemented&quot;: [
+    &quot;Planvalidierung mit maximal 20 Tasks, Rollen und Abhängigkeitsprüfung&quot;,
+    &quot;Menschlicher Freigabepfad für vertrauenswürdige lokale Aufrufer&quot;,
+    &quot;Globale Vetos mit eindeutigen IDs und expliziten Overrides&quot;,
+    &quot;Bereitschaftslisten für parallele Aufgaben und Ergebnisprüfungen&quot;,
+    &quot;Pause, defensive Kopien und In-Memory-Audit&quot;
+  ],
+  &quot;artifacts&quot;: [
+    &quot;approval.json&quot;,
+    &quot;contracts.md&quot;,
+    &quot;operations.md&quot;,
+    &quot;threat_model.md&quot;,
+    &quot;planner.py&quot;,
+    &quot;test_planner.py&quot;,
+    &quot;example_simulated.json&quot;,
+    &quot;README.md&quot;,
+    &quot;run.log&quot;
+  ],
+  &quot;task_results&quot;: &quot;result_t0.json bis result_t8.json&quot;,
+  &quot;final_review_artifact&quot;: &quot;final_review.json&quot;,
+  &quot;tests&quot;: {
+    &quot;methods_written&quot;: 12,
+    &quot;executed&quot;: false,
+    &quot;passed&quot;: null
+  },
+  &quot;actual_parallel_agent_execution&quot;: false,
+  &quot;network_or_model_calls&quot;: false,
+  &quot;limitations&quot;: [
+    &quot;Alle Rollen werden von demselben Dialogassistenten dargestellt, nicht von unabhängigen Instanzen.&quot;,
+    &quot;Kein Worker, keine LLM-Anbindung, kein produktiver Unternehmensbetrieb.&quot;,
+    &quot;Keine Authentifizierung oder Sandbox; direkte Nutzung nur durch vertrauenswürdige menschliche Aufrufer.&quot;,
+    &quot;Keine Thread-Sicherheit, persistente Wiederherstellung oder manipulationssichere Auditierung.&quot;,
+    &quot;A-03 benötigt semantische menschliche Prüfung.&quot;,
+    &quot;Statisch geprüfter Quelltext ist keine Garantie fehlerfreien Laufzeitverhaltens.&quot;
+  ],
+  &quot;next_human_decisions&quot;: [
+    {
+      &quot;decision&quot;: &quot;Tests lokal ausführen und Ergebnisse prüfen&quot;,
+      &quot;reason&quot;: &quot;Laufzeitverifikation steht aus.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Erstes Produkt, Budget und verantwortliche Menschen definieren&quot;,
+      &quot;reason&quot;: &quot;Ein konkreter Unternehmensauftrag fehlt.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Weiterentwicklung separat planen und freigeben&quot;,
+      &quot;reason&quot;: &quot;Die jetzige Freigabe deckt keine neue Betriebsautonomie ab.&quot;
+    }
+  ]
+}</code></pre>
+<h2>example_simulated.json</h2>
+<pre><code>{
+  &quot;simulated&quot;: true,
+  &quot;executed&quot;: false,
+  &quot;decision&quot;: &quot;Nur einen erwarteten Kontrollfluss illustrieren&quot;,
+  &quot;reason&quot;: &quot;Es wurde kein Modell, Worker oder Unternehmen gestartet.&quot;,
+  &quot;scenario&quot;: [
+    {
+      &quot;decision&quot;: &quot;ready vor approve ablehnen&quot;,
+      &quot;reason&quot;: &quot;Menschliche Zustimmung fehlt.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Nach approve mit j nur t0 bereitstellen&quot;,
+      &quot;reason&quot;: &quot;Weitere Tasks hängen von t0 ab.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Nach submit(t0) weiterhin warten&quot;,
+      &quot;reason&quot;: &quot;Das Ergebnis braucht eine FREI-Prüfung.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Nach review(t0, FREI) t1, t2 und t3 bereitstellen&quot;,
+      &quot;reason&quot;: &quot;Die drei Spezifikationsaufgaben des Projektplans haben erfüllte Abhängigkeiten.&quot;
+    },
+    {
+      &quot;decision&quot;: &quot;Bei offenem Veto global blockieren&quot;,
+      &quot;reason&quot;: &quot;Nur menschliches override der konkreten ID kann die Sperre aufheben.&quot;
+    }
+  ]
+}</code></pre>
+<h2>run.log</h2>
+<pre><code>NEXUS | t0 | decision=Artefakterstellung freigegeben | reason=Menschliches j im Dialog; keine Codeausführung genehmigt.
+PRISM | t1 | decision=Datenverträge erstellt | reason=Prüfbare lokale Schnittstellen erforderlich.
+PULSE | t2 | decision=Betriebsgrenzen erstellt | reason=Kontinuität bleibt menschlich autorisiert.
+AEGIS | t3 | decision=Bedrohungsmodell erstellt | reason=API-Vertrauen ist keine Sandbox.
+FORGE | t4 | decision=planner.py erstellt | reason=Kontrollfluss als stdlib-Bibliothek abbilden.
+FORGE | t5 | decision=Tests und simuliertes Beispiel erstellt | reason=Spätere lokale Verifikation ermöglichen.
+PULSE | t6 | decision=README und dieses Erstellungslog erstellt | reason=Bedienung und reale Grenzen dokumentieren.
+PULSE | scope | decision=Keine Laufzeitmessungen oder Testresultate protokollieren | reason=Code, Tests, Worker und Modelle wurden nicht ausgeführt.
+PULSE | parallelism | decision=Nur Parallelitätsgruppen geplant | reason=Keine tatsächlich parallel operierenden KI-Agenten gestartet.
+PULSE | privacy | decision=Keine Telemetrie oder externen Dienste verwenden | reason=Lokale menschliche Kontrolle erhalten.
+</code></pre>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

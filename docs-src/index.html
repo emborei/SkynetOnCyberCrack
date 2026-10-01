@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aether · lokaler Kontrollfluss-Prototyp — SkynetOnCyberCrack</title>
+<meta name="description" content="Statische Demo- und Dokumentationsseite des Aether-Prototyps: Freigabesperren, Vetos, Ergebnisprüfungen. Kein Tracking, keine externen Ressourcen.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav">
+  <span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span>
+  <a class="active" href="index.html">Start</a>
+  <a href="demo.html">Interaktive Demo</a>
+  <a href="doku/transcript.html">Skript-Transkript</a>
+  <a href="doku/readme.html">Doku</a>
+  <a href="doku/artefakte.html">Artefakte</a>
+  <a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Aether — Autonomous Entity for Human-Aligned Enterprise Realization</h1>
+  <p class="lead">Ein lokal prüfbarer Prototyp für kontrollierte KI-Koordination: ein planender
+  Datenfluss mit menschlicher Freigabe, globalen Vetos und ergebnisprüfenden Gates —
+  bewusst <em>ohne</em> Worker, Modelle, Netzwerke oder autonome Taten.</p>
+
+  <div class="badges">
+    <span class="badge">Python 3.9+, stdlib only</span>
+    <span class="badge good">12/12 Unit-Tests bestanden (Sandbox-Lauf 2026-10-01)</span>
+    <span class="badge good">Python↔JS-Port: 66/66 Schritte paritätisch</span>
+    <span class="badge bad">keine Produktionsfreigabe</span>
+    <span class="badge">kein Tracking · keine externen Ressourcen</span>
+  </div>
+
+  <blockquote>
+    Maximiere Nutzen und Autonomie für den einzelnen Menschen,<br><br>
+    minimiere die Möglichkeit, dass das System selbst zu einem neuen Macht- und
+    Ausbeutungsinstrument wird.
+  </blockquote>
+
+  <div class="cols2">
+    <div class="card">
+      <h3>Was dieser Prototyp <em>ist</em></h3>
+      <p>Eine validierte Neun-Task-Planstruktur, eine Bibliothek für Freigabe-, Veto- und
+      Prüfsperren (<code>aether/planner.py</code>), dokumentierte Rollen (NEXUS, FORGE, PRISM,
+      AEGIS, PULSE) und vollständig lesbare Datenverträge, Logs und Prüfberichte.</p>
+    </div>
+    <div class="card">
+      <h3>Was er <em>nicht</em> ist</h3>
+      <p>Kein laufendes Unternehmen, keine parallelen Agentenprozesse, keine Modellläufe,
+      keine Authentifizierung, keine Sandbox gegen lokalen Code und keine Abnahme.
+      „Parallelität“ hier heißt: gleichzeitig bereitstehende Tasks, nicht aktive Worker.</p>
+    </div>
+  </div>
+
+  <h2>Demo</h2>
+  <div class="cards">
+    <div class="card">
+      <h3><a href="demo.html">Interaktive Browser-Demo</a></h3>
+      <p>Freigabesperren, Vetos und Overrides selbst bedienen — auf einem getreuen Port von
+      <code>planner.py</code>, komplett offline lauffähig. Inklusive „Ersten Lauf nachspielen“.</p>
+    </div>
+    <div class="card">
+      <h3><a href="doku/transcript.html">Skript-Transkript</a></h3>
+      <p>Die echte Bibliothek, deterministisch durchgespielt von
+      <code>demo/run_demo.py</code>: blockierte Aufrufe, Freigabe mit <span class="kbd">j</span>,
+      Veto, Override, Pause — als mitgelaufenes Protokoll.</p>
+    </div>
+    <div class="card">
+      <h3><a href="doku/artefakte.html">Artefakte im Original</a></h3>
+      <p>Plan, Freigabe, Ergebnisse <code>result_t0…t8</code>, Reviews, Summary und Run-Log —
+      unverändert eingebettet, damit jede Aussage auf der Seite prüfbar bleibt.</p>
+    </div>
+  </div>
+
+  <h2>Lokal ausführen (Voraussetzung: Python 3.9+, keine Pakete)</h2>
+  <pre><code># Tests der Bibliothek
+cd aether
+python3 -m unittest discover -s . -p 'test_*.py' -v
+
+# Skriptierte End-to-End-Demo der echten Gates
+python3 demo/run_demo.py
+
+# Parität Python-Original ↔ Browser-Port (benötigt Node.js)
+python3 tools/parity_check.py
+
+# Statische Seite neu bauen (Schreibzugriff nur auf docs/)
+python3 tools/build_site.py</code></pre>
+
+  <h2>Governance-Rahmen der Demo</h2>
+  <table>
+    <tr><th>Regel</th><th>Grenze</th></tr>
+    <tr><td>A-01</td><td>Maximal 20 Tasks pro Plan; Validierung lehnt größere Pläne ab.</td></tr>
+    <tr><td>A-02</td><td>Jede Entscheidung und jeder Task braucht ein nicht-leeres <code>reason</code>-Feld.</td></tr>
+    <tr><td>A-03</td><td>Kein Tracking, keine Telemetrie, keine Paywall, kein Vendor-Lock, keine Cloud-Pflicht, keine Obfuskation — auch nicht auf dieser Seite: sie lädt ausschließlich eigene Dateien.</td></tr>
+    <tr><td>A-04</td><td>Menschliche Kontrolle: Freigabe nur per exaktem <span class="kbd">j</span>, globale Vetos, Override nur per <span class="kbd">override &lt;ID&gt;</span>, Pause jederzeit.</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Ehrlicher Status.</strong> Diese Seite beschreibt einen Prüfstand, kein Produkt.
+    Die Testresultate stammen aus einem Sandbox-Lauf (Python 3.11.2) und ersetzen keine
+    menschliche Abnahme; die <a href="doku/threat_model.html">Vertrauensgrenze</a> gilt unverändert:
+    Die API unterscheidet nicht technisch zwischen Menschen und Agenten.
+  </div>
+</main>
+
+<footer class="site"><div class="wrap">
+  Statisch erzeugt mit <code>tools/build_site.py</code> aus den Artefakten unter
+  <code>aether/</code> · keine Cookies, keine Analysen, keine Fremd-Skripte ·
+  <a href="https://github.com/emborei/SkynetOnCyberCrack">Quelltext &amp; Verlauf</a>
+</div></footer>
+</body>
+</html>

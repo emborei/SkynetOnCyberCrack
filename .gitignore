@@ -1,0 +1,6 @@
+# Python
+__pycache__/
+*.pyc
+
+# Keine Website-Abhängigkeiten: docs/ ist generiert und committet,
+# es existiert kein npm/pip-Ökosystem in diesem Repository.
