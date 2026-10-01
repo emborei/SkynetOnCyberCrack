@@ -1,0 +1,10 @@
+NEXUS | t0 | decision=Artefakterstellung freigegeben | reason=Menschliches j im Dialog; keine Codeausführung genehmigt.
+PRISM | t1 | decision=Datenverträge erstellt | reason=Prüfbare lokale Schnittstellen erforderlich.
+PULSE | t2 | decision=Betriebsgrenzen erstellt | reason=Kontinuität bleibt menschlich autorisiert.
+AEGIS | t3 | decision=Bedrohungsmodell erstellt | reason=API-Vertrauen ist keine Sandbox.
+FORGE | t4 | decision=planner.py erstellt | reason=Kontrollfluss als stdlib-Bibliothek abbilden.
+FORGE | t5 | decision=Tests und simuliertes Beispiel erstellt | reason=Spätere lokale Verifikation ermöglichen.
+PULSE | t6 | decision=README und dieses Erstellungslog erstellt | reason=Bedienung und reale Grenzen dokumentieren.
+PULSE | scope | decision=Keine Laufzeitmessungen oder Testresultate protokollieren | reason=Code, Tests, Worker und Modelle wurden nicht ausgeführt.
+PULSE | parallelism | decision=Nur Parallelitätsgruppen geplant | reason=Keine tatsächlich parallel operierenden KI-Agenten gestartet.
+PULSE | privacy | decision=Keine Telemetrie oder externen Dienste verwenden | reason=Lokale menschliche Kontrolle erhalten.

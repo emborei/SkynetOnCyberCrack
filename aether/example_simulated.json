@@ -1,0 +1,13 @@
+{
+  "simulated": true,
+  "executed": false,
+  "decision": "Nur einen erwarteten Kontrollfluss illustrieren",
+  "reason": "Es wurde kein Modell, Worker oder Unternehmen gestartet.",
+  "scenario": [
+    {"decision": "ready vor approve ablehnen", "reason": "Menschliche Zustimmung fehlt."},
+    {"decision": "Nach approve mit j nur t0 bereitstellen", "reason": "Weitere Tasks hängen von t0 ab."},
+    {"decision": "Nach submit(t0) weiterhin warten", "reason": "Das Ergebnis braucht eine FREI-Prüfung."},
+    {"decision": "Nach review(t0, FREI) t1, t2 und t3 bereitstellen", "reason": "Die drei Spezifikationsaufgaben des Projektplans haben erfüllte Abhängigkeiten."},
+    {"decision": "Bei offenem Veto global blockieren", "reason": "Nur menschliches override der konkreten ID kann die Sperre aufheben."}
+  ]
+}

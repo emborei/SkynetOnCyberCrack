@@ -1,0 +1,12 @@
+{
+  "task_id": "t8",
+  "output": ["aether/final_review.json"],
+  "explanation": "Abschließende statische Rollenprüfung der erstellten Artefakte dokumentiert. Keine Code- oder Testausführung.",
+  "decision": "FREI für den Abschluss der Text-Artefakterstellung",
+  "reason": "Keine offenen Vetos im begrenzten Umfang; Produktionsbetrieb und untrusted-Agent-Zugriff bleiben ausdrücklich außerhalb der Freigabe.",
+  "aegis_review": {
+    "status": "FREI",
+    "reason": "Der Prüfbericht benennt seine Methode und Grenzen, ohne unabhängige Prüfung oder getestete Laufzeit zu behaupten.",
+    "method": "Statische Selbstprüfung durch denselben Dialogassistenten, keine unabhängige Abnahme"
+  }
+}
