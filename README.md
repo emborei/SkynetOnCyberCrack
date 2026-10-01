@@ -1,52 +1,63 @@
 # SkynetOnCyberCrack
 
-Enthält **Aether**, einen lokalen, prüfbaren Kontrollfluss-Prototypen unter
-[`aether/`](aether/), und eine statische Demonstration davon unter
-[`aether/demo/`](aether/demo/).
+Sammelrepository für den Prototyp **Aether** (*Autonomous Entity for Human-Aligned
+Enterprise Realization*): ein streng lokal gehaltener, menschlich kontrollierter
+Kontrollfluss für Planung, Freigabe, Vetos und Ergebnisprüfung.
 
-## Demo
+> **Ehrlicher Status:** Es existiert ein validierbarer Prototyp-Baukasten mit
+> dokumentierten Grenzen — kein laufendes Unternehmen, keine autonomen Agenten,
+> keine Modellläufe, keine Produktionsfreigabe.
 
-**Öffentlich:** <https://emborei.github.io/SkynetOnCyberCrack/>
+## Struktur
 
-Die Seite replayt echte Abläufe von `aether/planner.py` – Freigabesperre,
-globale Vetos, Ergebnisprüfung und Pause – Schritt für Schritt, einschließlich
-der tatsächlich geworfenen Ausnahmen. Fünf Abläufe mit 57 Schritten werden beim
-Bauen der Seite durch die reale Bibliothek erzeugt; angezeigte Fehler sind
-keine nachgestellten Meldungen.
+| Pfad | Inhalt |
+| --- | --- |
+| `aether/` | Geprüfter Prototyp: Rollen, Plan, Datenverträge, `planner.py`, Tests, Artefakte des ersten Laufs |
+| `demo/` | Deterministische End-to-End-Demo, die die echten Gates von `aether/planner.py` durchspielt |
+| `docs-src/` | Quelltext der statischen Seite (inkl. getreuer Browser-Port des Planners) |
+| `docs/` | Gebaute, statische GitHub-Pages-Seite (keine externen Ressourcen, kein Tracking) |
+| `tools/` | `build_site.py` (Seitenbau), `parity_check.py` (Python↔JS-Paritätsbeweis) |
+| `.github/workflows/pages.yml` | Optionaler Pages-Deploy aus `docs/` bei Merge nach `main` |
 
-Sie ist vollständig statisch: keine Cookies, kein Analytics, keine Schriften
-oder Bibliotheken von Dritten, kein einziger Netzwerkaufruf aus dem Browser.
-Kostenfrei gehostet auf GitHub Pages aus einem öffentlichen Repository.
-
-Lokal bauen und ansehen:
+## Schnellstart (Python 3.9+, nur Standardbibliothek)
 
 ```sh
-python3 aether/demo/build.py
-python3 -m http.server 8000 --directory aether/demo/_site
+# 1) Unit-Tests der Bibliothek
+cd aether && python3 -m unittest discover -s . -p 'test_*.py' -v && cd ..
+
+# 2) Skriptierte Demo der Gates (Freigabe, Veto, Override, Pause)
+python3 demo/run_demo.py
+
+# 3) Parität Python-Original ↔ Browser-Port (benötigt Node.js)
+python3 tools/parity_check.py
+
+# 4) Statische Seite bauen (schreibt ausschließlich docs/)
+python3 tools/build_site.py
 ```
 
-Der Build führt die Unit-Tests aus und bricht ab, wenn sie fehlschlagen; aus
-einem roten Build wird nichts veröffentlicht. Zusätzlich prüft er, dass die
-Seite keine externe Referenz lädt (`check_offline.py`, Veto-Regel A-03) und dass
-`app.js` keine Element-ID anspricht, die `index.html` nicht definiert.
+Die fertige Seite liegt unter `docs/` und lässt sich ohne Webserver direkt öffnen
+(`docs/index.html`); `docs/demo.html` funktioniert vollständig offline. Nach einem
+Merge nach `main` deployt der Workflow die Seite optional auf GitHub Pages.
 
 ## Verifikationsstand
 
-`aether/summary.json` und `aether/final_review.json` dokumentieren den ersten
-Erstellungsdurchlauf, in dem Code und Tests ausdrücklich **nicht** ausgeführt
-wurden. Diese Grenze ist inzwischen geschlossen: die 12 Unittest-Methoden aus
-`aether/test_planner.py` werden lokal und in jedem CI-Lauf ausgeführt und
-bestehen. Die historischen Artefakte wurden dabei nicht nachträglich verändert –
-sie beschreiben weiterhin zutreffend ihren eigenen Durchlauf.
+- 2026-10-01, Sandbox-Lauf (Python 3.11.2): **12/12 Unit-Tests bestanden**
+  (`aether/test_planner.py`, unverändert seit PR #1).
+- 2026-10-01: **Paritätsprüfung bestanden** — 66/66 Schritte inkl. 34
+  Fehlerabweisungen identisch zwischen `aether/planner.py` und dem Browser-Port.
+- Die Transkripte der Seitenbau-Läufe sind in `docs/doku/transcript.html` eingebettet.
 
-Unverändert gültig bleiben die dokumentierten Einschränkungen: keine
-unabhängigen Agentenprozesse, keine echten Modellaufrufe, keine Sandbox oder
-Authentifizierung, kein Produktionsbetrieb.
+Diese Ergebnisse belegen Verhalten der getesteten API in einer Sandbox. Sie sind
+keine Abnahme, kein Sicherheitsnachweis und keine Betriebsfreigabe — die
+[Vertrauensgrenze](aether/threat_model.md) bleibt: Die API unterscheidet nicht
+technisch zwischen Menschen und Agenten.
 
-## Herkunft der Demo
+## Leitplanke
 
-Die Demo ist ein **Neubau** dieser Sitzung. Ein in einer früheren Sitzung lokal
-vorbereiteter Commit `493daf9` war nicht auffindbar – nicht im Repository, im
-Reflog, unter verwaisten Objekten (`git fsck`) oder auf GitHub
-(`422 No commit found for SHA`) – und ist nicht wiederherstellbar. Kein Teil
-dieser Demo stammt aus ihm.
+> Maximiere Nutzen und Autonomie für den einzelnen Menschen,
+> minimiere die Möglichkeit, dass das System selbst zu einem neuen Macht- und
+> Ausbeutungsinstrument wird.
+
+Freigabe erfolgt ausschließlich durch ein menschliches `j`; offene Vetos blockieren
+global; nur `override <ID>` durch den Menschen hebt ein konkretes Veto auf. Details
+in [`aether/goal.md`](aether/goal.md) und [`aether/contracts.md`](aether/contracts.md).

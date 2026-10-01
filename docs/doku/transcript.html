@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skript-Transkript der echten Gates · Aether-Demo</title>
+<meta name="description" content="Skript-Transkript der echten Gates — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a class="active" href="transcript.html">Skript-Transkript</a><a href="readme.html">Doku</a><a href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Skript-Transkript der echten Gates</h1>
+<p>Erzeugt bei jedem Aufruf von <code>python3 tools/build_site.py</code> durch Ausführung von <code>python3 demo/run_demo.py</code> gegen die echte Bibliothek <code>aether/planner.py</code> (dieser Build lief mit Python 3.11.2). Deterministisch: keine Zeitstempel, keine Pfade des Build-Rechners.</p><pre><code>==============================================================================
+Aether-Kontrollfluss-Demo  |  echte Bibliothek aether/planner.py
+Alle Task-Ergebnisse sind simuliert (simulated=true, executed=false).
+==============================================================================
+
+[0] Planvalidierung: 9 Tasks, Regel A-01 (max. 20) eingehalten.
+    t0 [NEXUS] deps=keine      parallel_group=—
+    t1 [PRISM] deps=t0         parallel_group=p1
+    t2 [PULSE] deps=t0         parallel_group=p1
+    t3 [AEGIS] deps=t0         parallel_group=p1
+    t4 [FORGE] deps=t1, t2, t3 parallel_group=—
+    t5 [FORGE] deps=t4         parallel_group=p2
+    t6 [PULSE] deps=t4         parallel_group=p2
+    t7 [NEXUS] deps=t5, t6     parallel_group=—
+    t8 [AEGIS] deps=t7         parallel_group=—
+
+[1] Blocker ohne menschliche Freigabe
+  ready() vor approve -&gt; PermissionError: Human approval required  (erwartet und korrekt abgewiesen)
+  approve(&quot;J&quot;) -&gt; ValueError: Expected exact human command: j  (erwartet und korrekt abgewiesen)
+  approve(&quot;ja&quot;) -&gt; ValueError: Expected exact human command: j  (erwartet und korrekt abgewiesen)
+  approve(&quot; j&quot;) -&gt; ValueError: Expected exact human command: j  (erwartet und korrekt abgewiesen)
+
+[2] Menschliche Freigabe mit exakt &quot;j&quot;
+    Freigabe erteilt. Bereitschaftsliste: [&#x27;t0&#x27;]
+
+[3] Regelablauf: Aufgabe abgeben, Ergebnis prüfen, Abhängigkeit erfüllen
+    t0: Ergebnis abgegeben
+    t0: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t1: Ergebnis abgegeben (zurückgestellt: t2, t3)
+    t1: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t2: Ergebnis abgegeben (zurückgestellt: t3)
+    t2: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t3: Ergebnis abgegeben
+    t3: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t4: Ergebnis abgegeben
+    t4: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    --- demonstrativer AEGIS-Veto gegen &quot;t5&quot; (Regel A-04) ---
+  ready() mit offenem Veto -&gt; PermissionError: Open veto blocks progress  (erwartet und korrekt abgewiesen)
+    override review-t5-1 akzeptiert; die Sperre ist weg, t5 fehlt aber weiter.
+  erneuter override von review-t5-1 -&gt; ValueError: Unknown or already overridden veto  (erwartet und korrekt abgewiesen)
+    t5 jetzt FREI geprüft. Hinweis: Ein Override ersetzt nie die FREI-Prüfung.
+    t6: Ergebnis abgegeben
+    t6: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t7: Ergebnis abgegeben
+    t7: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    t8: Ergebnis abgegeben
+    t8: AEGIS-Prüfung FREI -&gt; Abhängigkeit erfüllt
+    Alle neun Tasks sind FREI geprüft; die Bereitschaftsliste ist leer.
+
+[4] Pause ist jederzeit möglich und erfordert neue Freigabe
+  ready() nach pause -&gt; PermissionError: Human approval required  (erwartet und korrekt abgewiesen)
+    Nach erneuter Freigabe bleibt ready() leer (alles erledigt): []
+
+[5] Abschlusskontrolle (snapshot, In-Memory-Audit)
+    approved=True  results=9  reviews=9  events=24
+    offene Vetos: 0  (Demo-Veto wurde vom Menschen overridden)
+
+==============================================================================
+DEMO OK  |  Freigabe-, Veto- und Prüfsperren haben wie spezifiziert gearbeitet.
+Dies ist kein Laufzeitbeweis für Produktionsfähigkeit und keine Abnahme.
+==============================================================================
+</code></pre>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

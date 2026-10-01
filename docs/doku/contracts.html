@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenverträge · Aether-Demo</title>
+<meta name="description" content="Datenverträge — lokale Aether-Demo ohne Tracking.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap nav"><span class="brand">AETHER<span>·</span>SKYNET<span>·</span>DEMO</span><a href="../index.html">Start</a><a href="../demo.html">Interaktive Demo</a><a href="transcript.html">Skript-Transkript</a><a href="readme.html">Doku</a><a href="artefakte.html">Artefakte</a><a href="https://github.com/emborei/SkynetOnCyberCrack">Repository</a></div></header>
+<main class="wrap">
+<h1>Datenverträge</h1>
+<p class="lead">Quelle: <code>aether/contracts.md</code> (unverändert konvertiert).</p><h1>Datenverträge, Version 1</h1>
+<h2>Task</h2>
+<p><code>plan.json</code> ist eine Liste mit 1–20 Objekten: <code>id</code> (eindeutiger nicht leerer String), <code>title</code>, <code>assignee</code> (NEXUS/FORGE/PRISM/AEGIS/PULSE), <code>reason</code> (jeweils nicht leere Strings), <code>depends_on</code> (Liste eindeutiger existierender Task-IDs), <code>parallel_group</code> (null oder nicht leerer String). Erster Task: <code>t0</code>, NEXUS. Letzter Task: AEGIS. Zyklen und Selbstabhängigkeiten sind verboten.</p>
+<h2>Entscheidung</h2>
+<p>Jede Entscheidung enthält <code>decision</code> und <code>reason</code>. Freitexte sind Daten, niemals ausführbare Befehle. Fehlende Informationen werden nicht automatisch ergänzt.</p>
+<h2>Laufzeitzustand</h2>
+<p>Der Planner hält eine private Kopie des Plans nur im Speicher. Jeder neue Planner benötigt eine eigene Freigabe. Änderungen erfordern eine neue Instanz und damit erneute Freigabe. Die Dialogfreigabe wird nicht automatisch importiert.</p>
+<p><code>approve(command, reason)</code> akzeptiert exakt <code>j</code> und eine Begründung. Nur der vertrauenswürdige menschliche Aufrufer darf Freigabe-, Review- oder Override-Methoden aufrufen. Dies ist eine API-Konvention, keine Authentifizierung.</p>
+<h2>Veto</h2>
+<p><code>veto(id, rule, artifact, reason)</code> erstellt ein Veto; <code>rule</code> ist A-01 bis A-04. IDs dürfen nicht wiederverwendet werden. <code>override(command, reason)</code> akzeptiert exakt <code>override &lt;ID&gt;</code> für ein bestehendes offenes Veto. Unbekannte IDs und Wiederholungen sind Fehler. Ein Veto blockiert global neue Bereitstellung und Ergebnisannahme. Ein Override ist keine Planfreigabe.</p>
+<h2>Ergebnis und Prüfung</h2>
+<p><code>submit(task_id, output, explanation)</code> speichert einen Vorschlag: <code>task_id</code>, <code>output</code> (JSON-serialisierbare Daten), <code>explanation</code>. <code>review(task_id, status, reason)</code> akzeptiert FREI oder VETO. Nur FREI erfüllt eine Abhängigkeit. VETO erzeugt ein neues globales Veto; selbst nach dessen Override braucht das Ergebnis eine neue FREI-Prüfung. Nachfolgeaufgaben werden nicht allein durch Ergebnisabgabe freigegeben.</p>
+<p>Die Ergebnisdateien dieses Erstellungsdurchlaufs enthalten zusätzlich <code>decision</code>, <code>reason</code> und <code>aegis_review</code>. Sie sind Dokumentation, keine Eingabe zur automatischen Laufzeitfreigabe.</p>
+<h2>Parallelität</h2>
+<p><code>ready()</code> liefert freigegebene, noch nicht eingereichte Tasks, deren Abhängigkeiten FREI sind. Tasks derselben nicht leeren <code>parallel_group</code> dürfen von einem externen menschlich kontrollierten Aufrufer parallel bearbeitet werden. Der Prototyp startet keine Worker und führt keine Tasks aus. Gruppen ersetzen keine Abhängigkeiten. API-Aufrufe sind sequenziell; keine Thread-Sicherheit zugesagt.</p>
+<h2>Audit</h2>
+<p>Jedes erfolgreiche zustandsändernde API-Ereignis enthält <code>decision</code> und <code>reason</code>. Das In-Memory-Audit protokolliert IDs, keine Outputs. Es ist nicht manipulationssicher. <code>snapshot()</code> liefert unabhängige Kopien, keine veränderbaren internen Referenzen.</p>
+<ul><li>decision: Kein generisches Plugin, keine Shell, keine Modellanbindung und keine automatische Unternehmenshandlung.</li></ul>
+<p>reason: Die erste Version demonstriert ausschließlich Kontrollfluss; sie ist kein produktionsreifes autonomes System.</p>
+</main>
+<footer class="site"><div class="wrap">Erzeugt von <code>tools/build_site.py</code> aus den Repo-Artefakten · keine Cookies, keine Analysen, keine externen Ressourcen</div></footer>
+</body>
+</html>

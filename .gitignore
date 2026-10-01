@@ -1,7 +1,6 @@
-# Generated demo site: rebuilt by aether/demo/build.py locally and by
-# .github/workflows/demo-pages.yml in CI. Keep it out of Git.
-aether/demo/_site/
-
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
+
+# Keine Website-Abhängigkeiten: docs/ ist generiert und committet,
+# es existiert kein npm/pip-Ökosystem in diesem Repository.
